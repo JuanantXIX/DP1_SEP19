@@ -28,7 +28,9 @@
 		<form:label path="brandName">
 			<spring:message code="registration.brandName" />* :
 		</form:label>
-			<form:options items="${makes}"/>
+			<form:select multiple="false" id="brandName" path="brandName">
+		<form:options items="${makes}"/>
+		</form:select>
 		<form:errors cssClass="error" path="brandName" />
 		<br/><br/>
 

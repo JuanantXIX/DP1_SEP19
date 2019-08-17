@@ -47,9 +47,18 @@
 <display:column><a href="message/administrator/broadcast.do?broadcastType=1&conferenceId=${row.id }"><spring:message code="message.admin.submissions"/></a></display:column>
 <display:column><a href="message/administrator/broadcast.do?broadcastType=0&conferenceId=${row.id }"><spring:message code="message.admin.register"/></a></display:column>
 </security:authorize>
+<security:authorize access="hasRole('ADMIN')">
+<display:column><a href="conference/administrator/show.do?conferenceId=${row.id }"><spring:message code="conference.show"/></a></display:column>
+</security:authorize>
+<security:authorize access="!hasRole('ADMIN')">
 <display:column><a href="conference/show.do?conferenceId=${row.id }"><spring:message code="conference.show"/></a></display:column>
+</security:authorize>
+<security:authorize access="hasRole('ADMIN')">
+<display:column><a href="activity/administrator/list.do?d-16544-p=1&conferenceId=${row.id }"><spring:message code="activity.conference.link"/></a></display:column>
+</security:authorize>
+<security:authorize access="!hasRole('ADMIN')">
 <display:column><a href="activity/list.do?d-16544-p=1&conferenceId=${row.id }"><spring:message code="activity.conference.link"/></a></display:column>
-
+</security:authorize>
 <security:authorize access="hasRole('ADMIN')">
 <display:column>
 <jstl:if test="${row.finalMode == false }">

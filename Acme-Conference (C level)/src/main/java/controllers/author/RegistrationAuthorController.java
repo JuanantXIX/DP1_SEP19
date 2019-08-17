@@ -107,13 +107,16 @@ public class RegistrationAuthorController extends AbstractController {
 				return res;
 			}
 			TimeUnit.SECONDS.sleep(1);
+			Assert.isTrue(registration.getExpirationYear() >= (new Date().getYear() - 100));
+			if (registration.getExpirationYear() == (new Date().getYear() - 100))
+				Assert.isTrue(registration.getExpirationMonth() > new Date().getMonth() - 1);
 			this.registrationService.save(registration);
 			res = new ModelAndView("redirect:/registration/author/list.do");
 			return res;
 		} catch (final ValidationException oops) {
 			res = this.createEditModelAndView(registration);
 		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(registration, "author.edit.commit.error");
+			res = this.createEditModelAndView(registration, "registration.edit.commit.error");
 		}
 
 		return res;

@@ -175,6 +175,9 @@ public class SubmissionAuthorController extends AbstractController {
 		ModelAndView result;
 		final Submission submission = this.submissionService.findOne(submissionId);
 		try {
+			final Author a = this.authorService.findByPrincipal();
+			Assert.isTrue(a.getId() == submission.getAuthor().getId());
+			Assert.isTrue(submission.getStatus().equals("ACCEPTED"));
 			Assert.isTrue(submission.getConference().getCameraReadyDeadline().after(new Date()), "deadline elapsed");
 			Assert.isTrue(submission.getCameraReadyPaper() == null);
 			Assert.isTrue(!submission.getReviewer().isEmpty());
@@ -189,7 +192,7 @@ public class SubmissionAuthorController extends AbstractController {
 				result.addObject("requestURI", "/submission/author/list.do");
 				result.addObject("message", "submission.deadline.elapsed");
 			} else
-				result = new ModelAndView("redirect:/list.do");
+				result = new ModelAndView("redirect:list.do");
 		}
 
 		return result;

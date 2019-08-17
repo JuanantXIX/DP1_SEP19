@@ -7,11 +7,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.ConferenceService;
 import domain.Conference;
 
@@ -21,6 +23,9 @@ public class ConferenceAnonController extends AbstractController {
 
 	@Autowired
 	private ConferenceService	conferenceService;
+
+	@Autowired
+	private ActorService		actorService;
 
 
 	//List forthcoming conferences (Between the submissionDeadline and the notificationDeadline dates).
@@ -71,7 +76,12 @@ public class ConferenceAnonController extends AbstractController {
 		ModelAndView result;
 
 		final Conference conference = this.conferenceService.findOne(conferenceId);
-
+		try {
+			Assert.isTrue(conference.isFinalMode());
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/welcome/index.do");
+			return result;
+		}
 		result = new ModelAndView("conference/show");
 		result.addObject("conference", conference);
 

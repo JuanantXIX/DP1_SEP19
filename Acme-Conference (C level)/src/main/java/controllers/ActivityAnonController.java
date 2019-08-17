@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,6 +48,12 @@ public class ActivityAnonController extends AbstractController {
 		ModelAndView result;
 
 		final Conference c = this.conferenceService.findOne(conferenceId);
+		try {
+			Assert.isTrue(c.isFinalMode());
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/welcome/index.do");
+			return result;
+		}
 		final List<Activity> activities = new ArrayList<Activity>(this.activityService.findAllByConference(conferenceId));
 		final List<Panel> panels = new ArrayList<Panel>();
 		final List<Presentation> presentations = new ArrayList<Presentation>();

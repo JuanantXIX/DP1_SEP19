@@ -32,7 +32,6 @@ public class ActorService {
 		userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
 		res = this.actorRepository.findByPrincipal(userAccount.getId());
-		Assert.notNull(res);
 
 		return res;
 	}

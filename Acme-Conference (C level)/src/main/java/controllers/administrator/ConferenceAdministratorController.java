@@ -193,4 +193,15 @@ public class ConferenceAdministratorController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final int conferenceId) {
+		ModelAndView result;
+
+		final Conference conference = this.conferenceService.findOne(conferenceId);
+		result = new ModelAndView("conference/show");
+		result.addObject("conference", conference);
+
+		return result;
+	}
+
 }
