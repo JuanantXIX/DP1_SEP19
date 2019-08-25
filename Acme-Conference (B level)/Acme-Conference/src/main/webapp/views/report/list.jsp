@@ -22,5 +22,9 @@
 <display:column><a href="report/reviewer/show.do?reportId=${row.id }"><spring:message code="report.show"/></a>
 </display:column>
 </security:authorize>
+<security:authorize access="hasRole('AUTHOR')">
+<display:column><a href="report/author/show.do?reportId=${row.id }"><spring:message code="report.show"/></a>
+</display:column>
+</security:authorize>
 </display:table>
 <br/>

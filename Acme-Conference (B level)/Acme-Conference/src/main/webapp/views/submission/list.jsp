@@ -33,6 +33,12 @@
 <a href="submission/author/paper.do?submissionId=${row.id }"><spring:message code="submission.crp.create"/></a>
 </jstl:if>
 </display:column>
+<display:column>
+<jstl:if test="${row.status == 'ACCEPTED' || row.status == 'REJECTED'}">
+<a href="report/author/list.do?submissionId=${row.id }"><spring:message code="report.show.authors"/></a>
+
+</jstl:if>
+</display:column>
 <display:column><a href="submission/author/show.do?submissionId=${row.id }"><spring:message code="submission.show"/></a>
 </display:column></security:authorize>
 <security:authorize access="hasRole('ADMIN')">

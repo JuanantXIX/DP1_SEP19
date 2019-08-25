@@ -21,3 +21,4 @@
 <br/>
 <h3><spring:message code="report.comments"/>: </h3><jstl:out value="${report.comments }"/>
 <br/>
+<h3><spring:message code="report.reviewer"/>: </h3><jstl:out value="${report.reviewer.name } ${report.reviewer.middleName} ${report.reviewer.surname }"/>
