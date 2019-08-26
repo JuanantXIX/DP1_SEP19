@@ -29,7 +29,11 @@
 <display:column><a href="category/administrator/show.do?categoryId=${row.id }"><spring:message code="category.show"/></a>
 </display:column>
 <security:authorize access="hasRole('ADMIN')">
-<display:column><a href="category/administrator/edit.do?categoryId=${row.id }"><spring:message code="category.edit"/></a></display:column>
+<display:column>
+<jstl:if test="${row.title[0] != 'CONFERENCE' && row.title[1] != 'CONFERENCIA' }">
+<a href="category/administrator/edit.do?categoryId=${row.id }"><spring:message code="category.edit"/></a>
+</jstl:if>
+</display:column>
 <display:column><a href="category/administrator/delete.do?categoryId=${row.id }"><spring:message code="category.delete"/></a></display:column>
 </security:authorize>
 </display:table>

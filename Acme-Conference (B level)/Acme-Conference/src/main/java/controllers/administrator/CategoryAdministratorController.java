@@ -54,6 +54,18 @@ public class CategoryAdministratorController extends AbstractController {
 		this.administratorService.checkAdministrator();
 		final ModelAndView result;
 		final Category category = this.categoryService.findOne(categoryId);
+		try {
+			this.categoryService.checkRootCategory(category);
+		} catch (final Throwable oops) {
+			final String message = oops.getMessage();
+			if (message.contains("Editing root category")) {
+				final Collection<Category> categories = this.categoryService.findAll();
+				result = new ModelAndView("category/list");
+				result.addObject("categories", categories);
+				result.addObject("message", "category.edit.error.root");
+				return result;
+			}
+		}
 		result = this.createEditModelAndView(category);
 		return result;
 	}
@@ -75,12 +87,19 @@ public class CategoryAdministratorController extends AbstractController {
 		this.administratorService.checkAdministrator();
 		final Category category = this.categoryService.findOne(categoryId);
 		try {
+			this.categoryService.checkRootCategory(category);
 			this.categoryService.prepareCategoryForDelete(category);
 			this.categoryService.delete(category);
 
 		} catch (final Throwable oops) {
 			final String message = oops.getMessage();
-			if (message.contains("ConstraintViolationException")) {
+			if (message.contains("Editing root category")) {
+				final Collection<Category> categories = this.categoryService.findAll();
+				result = new ModelAndView("category/list");
+				result.addObject("categories", categories);
+				result.addObject("message", "category.delete.error.root");
+				return result;
+			} else if (message.contains("ConstraintViolationException")) {
 				final Collection<Category> categories = this.categoryService.findAll();
 				result = new ModelAndView("category/list");
 				result.addObject("categories", categories);
@@ -92,7 +111,6 @@ public class CategoryAdministratorController extends AbstractController {
 		result = new ModelAndView("redirect:/category/administrator/list.do");
 		return result;
 	}
-
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@ModelAttribute @Valid final Category category, final BindingResult binding) {
 		ModelAndView res;
@@ -110,22 +128,30 @@ public class CategoryAdministratorController extends AbstractController {
 				return res;
 			}
 			if (category.getId() != 0) {
+
 				final Category dbCategory = this.categoryService.findOne(category.getId());
 				this.categoryService.fixLogicErrorsOnCategories2(category, dbCategory);
 
 			}
+			this.categoryService.checkRootCategory(category);
+
 			final Category savedCategory = this.categoryService.save(category);
 			if (category.getId() == 0)
 				this.categoryService.fixLogicErrorsOnCategories(savedCategory);
 			res = new ModelAndView("redirect:/category/administrator/list.do");
 			return res;
 		} catch (final Throwable oops) {
-			if (oops.getMessage() == "Wrong size")
+			if (oops.getMessage().contains("Editing root category")) {
+				final Collection<Category> categories = this.categoryService.findAll();
+				res = new ModelAndView("category/list");
+				res.addObject("categories", categories);
+				res.addObject("message", "category.edit.error.root");
+				return res;
+			} else if (oops.getMessage() == "Wrong size")
 				res = this.createEditModelAndView(category, "category.size.error");
 			else
 				res = this.createEditModelAndView(category, "category.commit.error");
 		}
-
 		return res;
 	}
 

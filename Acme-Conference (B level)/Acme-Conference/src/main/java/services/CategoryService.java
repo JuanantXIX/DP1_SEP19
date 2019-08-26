@@ -99,5 +99,8 @@ public class CategoryService {
 		}
 
 	}
-
+	public void checkRootCategory(final Category category) {
+		if (category.getTitle().contains("CONFERENCE") || category.getTitle().contains("CONFERENCIA"))
+			throw new IllegalArgumentException("Editing root category");
+	}
 }
