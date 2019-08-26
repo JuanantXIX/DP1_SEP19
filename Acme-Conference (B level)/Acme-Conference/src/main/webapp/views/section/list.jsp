@@ -16,10 +16,11 @@
 <display:column property="title" titleKey="section.title" />
 <display:column property="summary" titleKey="section.summary" />
 <display:column property="pictures" titleKey="section.pictures" />
+<display:column><a href="section/show.do?sectionId=${row.id }"><spring:message code="section.show"/></a>
+</display:column>
 <security:authorize access="hasRole('ADMIN')">
 
-<display:column><a href="section/administrator/show.do?sectionId=${row.id }"><spring:message code="section.show"/></a>
-</display:column>
+
 <display:column><a href="section/administrator/edit.do?sectionId=${row.id }"><spring:message code="section.edit"/></a></display:column>
 <display:column><a href="section/administrator/delete.do?sectionId=${row.id }"><spring:message code="section.delete"/></a></display:column>
 </security:authorize>

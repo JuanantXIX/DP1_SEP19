@@ -31,4 +31,14 @@ public class SectionAnonController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final int sectionId) {
+		final ModelAndView result;
+		final Section section = this.sectionService.findOne(sectionId);
+
+		result = new ModelAndView("section/show");
+		result.addObject("section", section);
+		return result;
+	}
+
 }

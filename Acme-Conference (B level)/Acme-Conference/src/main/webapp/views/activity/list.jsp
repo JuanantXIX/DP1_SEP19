@@ -23,10 +23,10 @@
 <display:column property="endDate" titleKey="activity.endDate"/>
 <display:column property="room" titleKey="activity.room"/>
 <display:column><a href="comment/activity/list.do?activityId=${row.id }"><spring:message code="comment.link.show"/></a></display:column>
+<display:column><a href="tutorial/show.do?tutorialId=${row.id }"><spring:message code="tutorial.show"/></a></display:column>
 
 <security:authorize access="hasRole('ADMIN')">
 
-<display:column><a href="tutorial/administrator/show.do?tutorialId=${row.id }"><spring:message code="tutorial.show"/></a></display:column>
 <display:column><a href="tutorial/administrator/edit.do?tutorialId=${row.id }"><spring:message code="activity.edit"/></a></display:column>
 <display:column><a href="tutorial/administrator/delete.do?tutorialId=${row.id }"><spring:message code="tutorial.delete"/></a></display:column>
 </security:authorize>
@@ -48,11 +48,11 @@
 <display:column property="endDate" titleKey="activity.endDate" />
 <display:column property="room" titleKey="activity.room" />
 <display:column><a href="comment/activity/list.do?activityId=${row.id }"><spring:message code="comment.link.show"/></a></display:column>
-
+<display:column><a href="panel/show.do?panelId=${row.id }"><spring:message code="activity.show"/></a>
+</display:column>
 <security:authorize access="hasRole('ADMIN')">
 
-<display:column><a href="activity/administrator/show.do?activityId=${row.id }"><spring:message code="activity.show"/></a>
-</display:column>
+
 <display:column><a href="panel/administrator/edit.do?panelId=${row.id }"><spring:message code="panel.edit"/></a></display:column>
 <display:column><a href="panel/administrator/delete.do?panelId=${row.id }"><spring:message code="panel.delete"/></a></display:column>
 </security:authorize>
@@ -71,11 +71,11 @@
 <display:column property="endDate" titleKey="activity.endDate" />
 <display:column property="room" titleKey="activity.room" />
 <display:column><a href="comment/activity/list.do?activityId=${row.id }"><spring:message code="comment.link.show"/></a></display:column>
-
+<display:column><a href="presentation/show.do?presentationId=${row.id }"><spring:message code="activity.show"/></a>
+</display:column>
 <security:authorize access="hasRole('ADMIN')">
 
-<display:column><a href="presentation/administrator/show.do?presentationId=${row.id }"><spring:message code="activity.show"/></a>
-</display:column>
+
 <display:column><a href="presentation/administrator/edit.do?presentationId=${row.id }"><spring:message code="activity.edit"/></a></display:column>
 <display:column><a href="presentation/administrator/delete.do?presentationId=${row.id }"><spring:message code="activity.delete"/></a></display:column>
 </security:authorize>

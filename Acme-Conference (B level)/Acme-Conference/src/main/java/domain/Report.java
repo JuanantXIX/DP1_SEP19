@@ -61,6 +61,7 @@ public class Report extends DomainEntity {
 		this.decision = decision;
 	}
 
+	@NotBlank
 	public String getComments() {
 		return this.comments;
 	}

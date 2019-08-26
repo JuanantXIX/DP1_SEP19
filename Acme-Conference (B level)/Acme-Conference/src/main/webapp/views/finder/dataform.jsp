@@ -52,14 +52,14 @@
 		<form:label path="startDate">
 			<spring:message code="finder.startDate" />* :
 		</form:label>
-		<form:input path="startDate"/>
+		<form:input path="startDate" placeholder="dd-MM-yyyy HH:mm"/>
 		<form:errors cssClass="error" path="startDate" />
 		<br/><br/>
 
 		<form:label path="endDate">
 			<spring:message code="finder.endDate" />* :
 		</form:label>
-		<form:input path="endDate"/>
+		<form:input path="endDate" placeholder="dd-MM-yyyy HH:mm"/>
 		<form:errors cssClass="error" path="endDate" />
 		<br/><br/>
 

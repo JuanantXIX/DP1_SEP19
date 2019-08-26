@@ -39,6 +39,10 @@
 		<security:intercept-url pattern="/activity/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/section/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/comment/**" access="permitAll" /> 
+		<security:intercept-url pattern="/presentation/show.do" access="permitAll" /> 
+		<security:intercept-url pattern="/panel/show.do" access="permitAll" /> 
+		<security:intercept-url pattern="/tutorial/show.do" access="permitAll" /> 
+		<security:intercept-url pattern="/section/show.do" access="permitAll" /> 
 		
 		
 		<!-- isAnonymous: Only anonymous users -->
