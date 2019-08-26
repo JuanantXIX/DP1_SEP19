@@ -45,12 +45,22 @@ public class CategoryService {
 		this.categoryRepository.delete(category);
 	}
 	public void prepareCategoryForDelete(final Category category) {
+		final Category newParent = category.getParents().get(0);
+
 		for (final Category c : category.getParents()) {
 			c.getChildren().remove(category);
 			this.categoryRepository.save(c);
 		}
 		for (final Category c : category.getChildren()) {
 			c.getParents().remove(category);
+			this.categoryRepository.save(c);
+		}
+		final Category newParent2 = this.categoryRepository.findOne(newParent.getId());
+		newParent2.getChildren().addAll(category.getChildren());
+		this.categoryRepository.save(newParent2);
+
+		for (final Category c : category.getChildren()) {
+			c.getParents().add(newParent2);
 			this.categoryRepository.save(c);
 		}
 		this.switchCategoryFromAllConferences(category);

@@ -15,15 +15,31 @@
 <jstl:if test="${language=='en'}" >
 <display:column property="title[0]" titleKey="category.title.english" />
 <display:column property="title[1]" titleKey="category.title.spanish" />
-<display:column property = "parents" titleKey="category.parents"/>
-<display:column property = "children" titleKey="category.children"/>
+<display:column titleKey="category.parents">
+<jstl:forEach items="${row.parents }" var="parent">
+<jstl:out value="| ${parent.title[0]} | "/>
+</jstl:forEach>
+</display:column>
+<display:column titleKey="category.children">
+<jstl:forEach items="${row.children }" var="child">
+<jstl:out value="| ${child.title[0]} | "/>
+</jstl:forEach>
+</display:column>
 </jstl:if>
 
 <jstl:if test="${language=='es'}">
 <display:column property="title[1]" titleKey="category.title.spanish" />
 <display:column property="title[0]" titleKey="category.title.english" />
-<display:column property = "parents" titleKey="category.parents"/>
-<display:column property = "children" titleKey="category.children"/>
+<display:column titleKey="category.parents">
+<jstl:forEach items="${row.parents }" var="parent">
+<jstl:out value="| ${parent.title[1]} | "/>
+</jstl:forEach>
+</display:column>
+<display:column titleKey="category.children">
+<jstl:forEach items="${row.children }" var="child">
+<jstl:out value="| ${child.title[1] } | "/>
+</jstl:forEach>
+</display:column>
 </jstl:if>
 
 <display:column><a href="category/administrator/show.do?categoryId=${row.id }"><spring:message code="category.show"/></a>
@@ -34,7 +50,10 @@
 <a href="category/administrator/edit.do?categoryId=${row.id }"><spring:message code="category.edit"/></a>
 </jstl:if>
 </display:column>
-<display:column><a href="category/administrator/delete.do?categoryId=${row.id }"><spring:message code="category.delete"/></a></display:column>
+<display:column>
+<jstl:if test="${row.title[0] != 'CONFERENCE' && row.title[1] != 'CONFERENCIA' }">
+<a href="category/administrator/delete.do?categoryId=${row.id }"><spring:message code="category.delete"/></a>
+</jstl:if></display:column>
 </security:authorize>
 </display:table>
 <a href="category/administrator/create.do"><spring:message code="category.create"/></a>

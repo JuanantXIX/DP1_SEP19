@@ -62,23 +62,7 @@
 	</property>
 	</bean>
 	
-	<!-- Customisation
-	this might be helpful:
-	<property name="topics">
-	<list>
-		<value>INQUIRY</value>
-		<value>REBUTTAL</value>
-		<value>REGISTRATION</value>
-		<value>TOPICS</value>
-		<value>OTHER</value>
-		<value>INVESTIGACIÓN</value>
-		<value>REFUTACIÓN</value>
-		<value>REGISTRO</value>
-		<value>TÓPICOS</value>
-		<value>OTROS</value>
-	</list>
-	</property>
-	 -->
+	<!-- Customisation -->
 	<bean id="customisation1" class="domain.Customisation">
 	<property name="systemName" value="Acme-Conference"/>
 	<property name="bannerUrl" value="https://i.ibb.co/GVpZCtM/acme-conference.png"/>
@@ -766,6 +750,8 @@
 	<property name="children">
 	<list>
 	<ref bean="category2"/>
+	<ref bean="category3"/>
+	<ref bean="category4"/>
 	</list>
 	</property>
 	</bean>
@@ -774,8 +760,8 @@
 	<bean id="category2" class="domain.Category">
 	<property name="title">
 	<list>
-	<value>TEST</value>
-	<value>PRUEBA</value>
+	<value>Computer Science</value>
+	<value>Ciencias de la Computación</value>
 	</list>
 	</property>
 	<property name="parents">
@@ -783,8 +769,335 @@
 	<ref bean="category1"/>
 	</list>
 	</property>
+	<property name="children">
+	<list>
+	<ref bean="category5"/>
+	<ref bean="category6"/>
+	</list>
+	</property>
 	</bean>
-
+	
+	<bean id="category3" class="domain.Category">
+	<property name="title">
+	<list>
+	<value>Physics</value>
+	<value>Física</value>
+	</list>
+	</property>
+	<property name="parents">
+	<list>
+	<ref bean="category1"/>
+	</list>
+	</property>
+	<property name="children">
+	<list>
+	<ref bean="category7"/>
+	<ref bean="category8"/>
+	<ref bean="category9"/>
+	</list>
+	</property>
+	</bean>
+	
+	<bean id="category4" class="domain.Category">
+	<property name="title">
+	<list>
+	<value>Biology</value>
+	<value>Biología</value>
+	</list>
+	</property>
+	<property name="parents">
+	<list>
+	<ref bean="category1"/>
+	</list>
+	</property>
+	<property name="children">
+	<list>
+	<ref bean="category10"/>
+	<ref bean="category11"/>
+	<ref bean="category12"/>
+	</list>
+	</property>
+	</bean>
+	
+	<bean id="category5" class="domain.Category">
+	<property name="title">
+	<list>
+	<value>Artificial Intelligence</value>
+	<value>Inteligencia Artificial</value>
+	</list>
+	</property>
+	<property name="parents">
+	<list>
+	<ref bean="category2"/>
+	</list>
+	</property>
+	<property name="children">
+	<list>
+	<ref bean="category13"/>
+	<ref bean="category14"/>
+	<ref bean="category15"/>
+	</list>
+	</property>
+	</bean>
+	
+	<bean id="category6" class="domain.Category">
+	<property name="title">
+	<list>
+	<value>Software Engineering</value>
+	<value>Ingeniería del Software</value>
+	</list>
+	</property>
+	<property name="parents">
+	<list>
+	<ref bean="category2"/>
+	</list>
+	</property>
+	<property name="children">
+	<list>
+	<ref bean="category16"/>
+	<ref bean="category17"/>
+	<ref bean="category18"/>
+	<ref bean="category19"/>
+	</list>
+	</property>
+	</bean>
+	
+	<bean id="category7" class="domain.Category">
+	<property name="title">
+	<list>
+	<value>Cinematic</value>
+	<value>Cinemática</value>
+	</list>
+	</property>
+	<property name="parents">
+	<list>
+	<ref bean="category3"/>
+	</list>
+	</property>
+	<property name="children">
+	<list>
+	</list>
+	</property>
+	</bean>
+	
+	<bean id="category8" class="domain.Category">
+	<property name="title">
+	<list>
+	<value>Electricity</value>
+	<value>Electricidad</value>
+	</list>
+	</property>
+	<property name="parents">
+	<list>
+	<ref bean="category3"/>
+	</list>
+	</property>
+	<property name="children">
+	<list>
+	</list>
+	</property>
+	</bean>
+	
+	<bean id="category9" class="domain.Category">
+	<property name="title">
+	<list>
+	<value>Electronic</value>
+	<value>Electrónica</value>
+	</list>
+	</property>
+	<property name="parents">
+	<list>
+	<ref bean="category3"/>
+	</list>
+	</property>
+	<property name="children">
+	<list>
+	</list>
+	</property>
+	</bean>
+	
+	<bean id="category10" class="domain.Category">
+	<property name="title">
+	<list>
+	<value>Animals</value>
+	<value>Animales</value>
+	</list>
+	</property>
+	<property name="parents">
+	<list>
+	<ref bean="category4"/>
+	</list>
+	</property>
+	<property name="children">
+	<list>
+	</list>
+	</property>
+	</bean>
+	
+	<bean id="category11" class="domain.Category">
+	<property name="title">
+	<list>
+	<value>Plants</value>
+	<value>Plantas</value>
+	</list>
+	</property>
+	<property name="parents">
+	<list>
+	<ref bean="category4"/>
+	</list>
+	</property>
+	<property name="children">
+	<list>
+	</list>
+	</property>
+	</bean>
+	
+	<bean id="category12" class="domain.Category">
+	<property name="title">
+	<list>
+	<value>Fungi</value>
+	<value>Hongos</value>
+	</list>
+	</property>
+	<property name="parents">
+	<list>
+	<ref bean="category4"/>
+	</list>
+	</property>
+	<property name="children">
+	<list>
+	</list>
+	</property>
+	</bean>
+	
+	<bean id="category13" class="domain.Category">
+	<property name="title">
+	<list>
+	<value>Deep Learning</value>
+	<value>Aprendizaje profundo</value>
+	</list>
+	</property>
+	<property name="parents">
+	<list>
+	<ref bean="category5"/>
+	</list>
+	</property>
+	<property name="children">
+	<list>
+	</list>
+	</property>
+	</bean>
+	
+	<bean id="category14" class="domain.Category">
+	<property name="title">
+	<list>
+	<value>Instance-Based learning</value>
+	<value>Aprendizaje basado en instancias</value>
+	</list>
+	</property>
+	<property name="parents">
+	<list>
+	<ref bean="category5"/>
+	</list>
+	</property>
+	<property name="children">
+	<list>
+	</list>
+	</property>
+	</bean>
+	
+	<bean id="category15" class="domain.Category">
+	<property name="title">
+	<list>
+	<value>Regression</value>
+	<value>Regresión</value>
+	</list>
+	</property>
+	<property name="parents">
+	<list>
+	<ref bean="category5"/>
+	</list>
+	</property>
+	<property name="children">
+	<list>
+	</list>
+	</property>
+	</bean>
+	
+	<bean id="category16" class="domain.Category">
+	<property name="title">
+	<list>
+	<value>Big Data</value>
+	<value>Big Data</value>
+	</list>
+	</property>
+	<property name="parents">
+	<list>
+	<ref bean="category6"/>
+	</list>
+	</property>
+	<property name="children">
+	<list>
+	</list>
+	</property>
+	</bean>
+	
+	<bean id="category17" class="domain.Category">
+	<property name="title">
+	<list>
+	<value>Big Processing</value>
+	<value>Gran Procesamiento</value>
+	</list>
+	</property>
+	<property name="parents">
+	<list>
+	<ref bean="category6"/>
+	</list>
+	</property>
+	<property name="children">
+	<list>
+	</list>
+	</property>
+	</bean>
+	
+	<bean id="category18" class="domain.Category">
+	<property name="title">
+	<list>
+	<value>Method</value>
+	<value>Método</value>
+	</list>
+	</property>
+	<property name="parents">
+	<list>
+	<ref bean="category6"/>
+	</list>
+	</property>
+	<property name="children">
+	<list>
+	</list>
+	</property>
+	</bean>
+	
+	<bean id="category19" class="domain.Category">
+	<property name="title">
+	<list>
+	<value>Tools</value>
+	<value>Herramientas</value>
+	</list>
+	</property>
+	<property name="parents">
+	<list>
+	<ref bean="category6"/>
+	</list>
+	</property>
+	<property name="children">
+	<list>
+	</list>
+	</property>
+	</bean>
+	
+	
+	
 	<!-- Comments -->
 	
 	<bean id="comment1" class="domain.Comment">

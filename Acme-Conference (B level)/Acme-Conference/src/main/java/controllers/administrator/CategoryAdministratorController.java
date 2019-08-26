@@ -38,6 +38,7 @@ public class CategoryAdministratorController extends AbstractController {
 		final Collection<Category> categories = this.categoryService.findAll();
 		result = new ModelAndView("category/list");
 		result.addObject("categories", categories);
+		result.addObject("requestURI", "/category/administrator/list.do");
 		return result;
 	}
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -63,6 +64,8 @@ public class CategoryAdministratorController extends AbstractController {
 				result = new ModelAndView("category/list");
 				result.addObject("categories", categories);
 				result.addObject("message", "category.edit.error.root");
+				result.addObject("requestURI", "/category/administrator/list.do");
+
 				return result;
 			}
 		}
@@ -98,12 +101,16 @@ public class CategoryAdministratorController extends AbstractController {
 				result = new ModelAndView("category/list");
 				result.addObject("categories", categories);
 				result.addObject("message", "category.delete.error.root");
+				result.addObject("requestURI", "/category/administrator/list.do");
+
 				return result;
 			} else if (message.contains("ConstraintViolationException")) {
 				final Collection<Category> categories = this.categoryService.findAll();
 				result = new ModelAndView("category/list");
 				result.addObject("categories", categories);
 				result.addObject("message", "category.delete.error.messages");
+				result.addObject("requestURI", "/category/administrator/list.do");
+
 				return result;
 			}
 		}
@@ -146,6 +153,8 @@ public class CategoryAdministratorController extends AbstractController {
 				res = new ModelAndView("category/list");
 				res.addObject("categories", categories);
 				res.addObject("message", "category.edit.error.root");
+				res.addObject("requestURI", "/category/administrator/list.do");
+
 				return res;
 			} else if (oops.getMessage() == "Wrong size")
 				res = this.createEditModelAndView(category, "category.size.error");
