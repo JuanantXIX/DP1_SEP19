@@ -29,6 +29,7 @@ public class SubmissionService {
 		s.setReviewer(new ArrayList<Reviewer>());
 		s.setMoment(new Date());
 		s.setStatus("UNDER-REVIEW");
+		s.setStatusVisible(false);
 		return s;
 	}
 
@@ -135,6 +136,10 @@ public class SubmissionService {
 
 	public List<Submission> findAllUnderReview() {
 		return this.submissionRepository.findAllUnderReview();
+	}
+
+	public List<Submission> findAllInvisible() {
+		return this.submissionRepository.findAllInvisible();
 	}
 
 	public Collection<Submission> findAllConferencesICanApply(final int id) {

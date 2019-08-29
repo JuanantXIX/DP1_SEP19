@@ -31,4 +31,7 @@ public interface SubmissionRepository extends JpaRepository<Submission, Integer>
 	@Query("select distinct s.conference from Submission s where s.author.id != ?1")
 	Collection<Submission> findAllConferencesICanAppy(int id);
 
+	@Query("select s from Submission s where s.statusVisible = FALSE")
+	List<Submission> findAllInvisible();
+
 }

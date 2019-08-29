@@ -15,7 +15,25 @@
 	
 <display:column property="ticker" titleKey="submission.ticker" />
 <display:column property="moment" titleKey="submission.moment" />
-<display:column property="status" titleKey="submission.status" />
+<security:authorize access="hasRole('AUTHOR')">
+<display:column titleKey="submission.status" >
+<jstl:if test="${row.statusVisible == true }">
+<jstl:if test="${row.status == 'ACCEPTED' }">
+<spring:message code="submission.status.accepted"/>
+
+</jstl:if>
+<jstl:if test="${row.status == 'REJECTED' }">
+<spring:message code="submission.status.rejected"/>
+
+</jstl:if></jstl:if>
+<jstl:if test="${row.statusVisible == false }">
+<spring:message code="submission.not.visible"/>
+</jstl:if>
+</display:column>
+</security:authorize>
+<security:authorize access="hasRole('ADMIN')">
+<display:column property = "status" titleKey="submission.status" />
+</security:authorize>
 <display:column property="paper.title" titleKey="submission.paper" />
 <display:column property="cameraReadyPaper.title" titleKey="submission.cameraReadyPaper" />
 <security:authorize access="hasRole('ADMIN')">
@@ -34,9 +52,11 @@
 </jstl:if>
 </display:column>
 <display:column>
+<jstl:if test="${row.statusVisible == true }">
 <jstl:if test="${row.status == 'ACCEPTED' || row.status == 'REJECTED'}">
 <a href="report/author/list.do?submissionId=${row.id }"><spring:message code="report.show.authors"/></a>
 
+</jstl:if>
 </jstl:if>
 </display:column>
 <display:column><a href="submission/author/show.do?submissionId=${row.id }"><spring:message code="submission.show"/></a>
@@ -62,7 +82,16 @@
 </security:authorize>
 </display:table>
 <security:authorize access="hasRole('ADMIN')">
+<a href="submission/administrator/evaluate.do"><spring:message code="submission.evaluate"/></a>
+
+<br/>
 <a href="submission/administrator/notify.do"><spring:message code="submission.notify"/></a>
 
+<br/>
+<br/>
+
+<spring:message code="submission.admin.footer.1"/><br/><spring:message code="submission.admin.footer.2"/>
+
 </security:authorize>
+
 <br/>

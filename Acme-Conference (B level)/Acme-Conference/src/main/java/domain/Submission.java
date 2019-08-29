@@ -31,6 +31,7 @@ public class Submission extends DomainEntity {
 	private Collection<Reviewer>	reviewer;
 	private Author					author;
 	private Conference				conference;
+	private boolean					statusVisible;
 
 
 	@NotBlank
@@ -108,6 +109,15 @@ public class Submission extends DomainEntity {
 
 	public void setConference(final Conference conference) {
 		this.conference = conference;
+	}
+
+	@NotNull
+	public boolean isStatusVisible() {
+		return this.statusVisible;
+	}
+
+	public void setStatusVisible(final boolean statusVisible) {
+		this.statusVisible = statusVisible;
 	}
 
 }

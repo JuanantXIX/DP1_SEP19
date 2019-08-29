@@ -156,8 +156,8 @@ public class SubmissionAdministratorController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/notify", method = RequestMethod.GET)
-	public ModelAndView notifyAuthors() {
+	@RequestMapping(value = "/evaluate", method = RequestMethod.GET)
+	public ModelAndView evaluateSubmissions() {
 		final ModelAndView result;
 
 		final Administrator actual = this.administratorService.findByPrincipal();
@@ -167,7 +167,7 @@ public class SubmissionAdministratorController extends AbstractController {
 		for (final Submission s : allSubs)
 			if (!s.getReviewer().isEmpty()) {
 				final List<Report> reportsOfSubmission = this.reportService.findAllBySubmissionId(s.getId());
-				if (s.getReviewer().size() == reportsOfSubmission.size()) {
+				if (reportsOfSubmission != null && !reportsOfSubmission.isEmpty()) {
 					int positive = 0;
 					int negative = 0;
 					int neutral = 0;
@@ -183,27 +183,52 @@ public class SubmissionAdministratorController extends AbstractController {
 					if (positive > negative) {
 						decision = "ACCEPTED";
 						s.setStatus(decision);
-						final Submission s2 = this.submissionService.save(s);
-						this.messageService.sendAcceptedMessage(s2, actual);
+						this.submissionService.save(s);
 					} else if (negative > positive) {
 						decision = "REJECTED";
 						s.setStatus(decision);
-						final Submission s2 = this.submissionService.save(s);
-						this.messageService.sendRejectedMessage(s2, actual);
+						this.submissionService.save(s);
 					} else if ((positive + neutral) >= negative) {
 						decision = "ACCEPTED";
 						s.setStatus(decision);
-						final Submission s2 = this.submissionService.save(s);
-						this.messageService.sendAcceptedMessage(s2, actual);
+						this.submissionService.save(s);
 					} else {
 						decision = "REJECTED";
 						s.setStatus(decision);
-						final Submission s2 = this.submissionService.save(s);
-						this.messageService.sendRejectedMessage(s2, actual);
+						this.submissionService.save(s);
 					}
 
 				}
 			}
+		final Collection<Submission> submissions = this.submissionService.findAllGroupedByStatus();
+		result = new ModelAndView("submission/list");
+		result.addObject("submissions", submissions);
+		result.addObject("message", "submission.scored");
+		result.addObject("requestURI", "/submission/administrator/list.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/notify", method = RequestMethod.GET)
+	public ModelAndView notifyAuthors() {
+		final ModelAndView result;
+
+		final Administrator actual = this.administratorService.findByPrincipal();
+
+		final List<Submission> allSubs = this.submissionService.findAllInvisible();
+
+		for (final Submission s : allSubs) {
+			if (s.getStatus().equals("ACCEPTED")) {
+				s.setStatusVisible(true);
+				final Submission s2 = this.submissionService.save(s);
+				this.messageService.sendAcceptedMessage(s2, actual);
+			}
+			if (s.getStatus().equals("REJECTED")) {
+				s.setStatusVisible(true);
+				final Submission s2 = this.submissionService.save(s);
+				this.messageService.sendAcceptedMessage(s2, actual);
+			}
+		}
 		final Collection<Submission> submissions = this.submissionService.findAllGroupedByStatus();
 		result = new ModelAndView("submission/list");
 		result.addObject("submissions", submissions);

@@ -22,6 +22,7 @@
 <form:hidden path="author" />
 <form:hidden path="conference" />
 <form:hidden path="paper" />
+<form:hidden path="statusVisible" />
 
 		
 		<form:label path="reviewer">

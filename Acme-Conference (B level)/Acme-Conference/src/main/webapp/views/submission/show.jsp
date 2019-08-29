@@ -15,7 +15,31 @@
 <br/>
 <h3><spring:message code="submission.moment"/>: </h3><jstl:out value="${submission.moment }"/>
 <br/>
-<h3><spring:message code="submission.status"/>: </h3><jstl:out value="${submission.status }"/>
+<h3><spring:message code="submission.status"/>: </h3>
+<security:authorize access = "hasRole('AUTHOR')">
+<jstl:if test = "${submission.statusVisible == true }">
+<jstl:if test="${submission.status == 'ACCEPTED' }">
+<spring:message code="submission.status.accepted" />
+</jstl:if>
+<jstl:if test="${submission.status == 'REJECTED' }">
+<spring:message code="submission.status.rejected" />
+</jstl:if>
+</jstl:if>
+<jstl:if test = "${submission.statusVisible == false }">
+<spring:message code="submission.not.visible" />
+</jstl:if>
+</security:authorize>
+<security:authorize access = "hasRole('ADMIN') || hasRole('REVIEWER')">
+<jstl:if test="${submission.status == 'ACCEPTED' }">
+<spring:message code="submission.status.accepted" />
+</jstl:if>
+<jstl:if test="${submission.status == 'REJECTED' }">
+<spring:message code="submission.status.rejected" />
+</jstl:if>
+<jstl:if test="${submission.status == 'UNDER-REVIEW' }">
+<spring:message code="submission.not.visible" />
+</jstl:if></security:authorize>
+
 <br/>
 <h3><spring:message code="submission.paper"/>: </h3>
 <div class="data" style="background: #DDD;">

@@ -21,6 +21,7 @@
 <form:hidden path="status" />
 <form:hidden path="author" />
 <form:hidden path="conference" />
+<form:hidden path="statusVisible" />
 
 
 		

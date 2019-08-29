@@ -602,6 +602,7 @@
 	
 	<!-- Submissions -->
 	<bean id="submission1" class="domain.Submission">
+	<property name="statusVisible" value="true"/>
 	<property name="ticker" value="AMS-5FEX"/>
 	<property name="moment" value="2020/02/01 21:00:00" />
 	<property name="paper" ref="paper1" />
@@ -630,9 +631,11 @@
 	<ref bean="reviewer1"/>
 	</list>
 	</property>
+	<property name="statusVisible" value="false"/>
+	
 	</bean>
 	
-				<bean id="submission3" class="domain.Submission">
+	<bean id="submission3" class="domain.Submission">
 	<property name="ticker" value="AMS-5FEX"/>
 	<property name="moment" value="2020/02/01 21:00:00" />
 	<property name="paper" ref="paper3" />
@@ -644,6 +647,7 @@
 	<ref bean="reviewer1"/>
 	</list>
 	</property>
+	<property name="statusVisible" value="false"/>
 	</bean>
 	
 				<bean id="submission4" class="domain.Submission">
@@ -658,6 +662,7 @@
 	<ref bean="reviewer1"/>
 	</list>
 	</property>
+	<property name="statusVisible" value="false"/>
 	</bean>
 	
 	
