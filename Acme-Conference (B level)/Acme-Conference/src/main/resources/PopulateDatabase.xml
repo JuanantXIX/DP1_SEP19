@@ -354,6 +354,7 @@
 		</property>
 		<property name="startDate" value="2020/02/02 21:00:00" />
 		<property name="endDate" value="2020/02/02 21:30:00" />
+		<property name="duration" value="30" />
 		<property name="paper" ref="paper1"/>
 		<property name="conference" ref="conference1"/>
 		<property name="comments">
@@ -378,6 +379,7 @@
 		</property>
 		<property name="startDate" value="2020/02/02 21:00:00" />
 		<property name="endDate" value="2020/02/02 21:30:00" />
+		<property name="duration" value="30" />
 		<property name="conference" ref="conference2"/>
 		<property name="comments">
 	<list>
@@ -397,6 +399,7 @@
 		<property name="room" value="211C"/>
 		<property name="startDate" value="2020/02/02 21:00:00" />
 		<property name="endDate" value="2020/02/02 21:30:00" />
+		<property name="duration" value="30" />
 		<property name="conference" ref="conference3"/>
 		<property name="comments">
 	<list>
@@ -672,7 +675,7 @@
 	<property name="originalityScore" value="6"/>
 	<property name="qualityScore" value="7"/>
 	<property name="readabilityScore" value="5"/>
-	<property name="decision" value="ACCEPTED" />
+	<property name="decision" value="ACCEPT" />
 	<property name="comments" value="The paper is very good"/>
 	<property name="reviewer" ref="reviewer1"/>
 	<property name="submission" ref="submission1"/>
@@ -682,7 +685,7 @@
 	<property name="originalityScore" value="6"/>
 	<property name="qualityScore" value="7"/>
 	<property name="readabilityScore" value="5"/>
-	<property name="decision" value="ACCEPTED" />
+	<property name="decision" value="ACCEPT" />
 	<property name="comments" value="The paper is very good"/>
 	<property name="reviewer" ref="reviewer1"/>
 	<property name="submission" ref="submission2"/>
@@ -692,7 +695,7 @@
 	<property name="originalityScore" value="2"/>
 	<property name="qualityScore" value="3"/>
 	<property name="readabilityScore" value="5"/>
-	<property name="decision" value="REJECTED" />
+	<property name="decision" value="REJECT" />
 	<property name="comments" value="The paper is not very good"/>
 	<property name="reviewer" ref="reviewer1"/>
 	<property name="submission" ref="submission3"/>
@@ -702,7 +705,7 @@
 	<property name="originalityScore" value="6"/>
 	<property name="qualityScore" value="7"/>
 	<property name="readabilityScore" value="5"/>
-	<property name="decision" value="ACCEPTED" />
+	<property name="decision" value="ACCEPT" />
 	<property name="comments" value="The paper is very good"/>
 	<property name="reviewer" ref="reviewer1"/>
 	<property name="submission" ref="submission4"/>

@@ -1,6 +1,8 @@
 
 package controllers.administrator;
 
+import java.util.Calendar;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +85,15 @@ public class PanelAdministratorControllerController extends AbstractController {
 				res = this.createEditModelAndView(panel, "panel.commit.error");
 				return res;
 			}
+			//Calculo endDate a partir de startDate y duration:
+			final Calendar cal = Calendar.getInstance();
+			cal.setTime(panel.getStartDate());
+
+			cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE) + panel.getDuration());
+
+			panel.setEndDate(cal.getTime());
+
+			//Fin del cálculo
 			final Conference c = panel.getConference();
 			Assert.isTrue(!c.getStartDate().after(panel.getStartDate()), "wrong start");
 			Assert.isTrue(!c.getEndDate().before(panel.getEndDate()), "wrong end");

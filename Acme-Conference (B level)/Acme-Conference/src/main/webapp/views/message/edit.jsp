@@ -14,6 +14,7 @@
 		<form:hidden path="version"/>
 		<form:hidden path="sender"/>
 		<form:hidden path="moment"/>
+		<form:hidden path="broadcast"/>
 		<spring:message code="message.recipient" />:*
 		<form:select multiple="false" id="recipient" path="recipient">
 		    <form:options items="${recipients}" itemLabel="email" itemValue="id" />

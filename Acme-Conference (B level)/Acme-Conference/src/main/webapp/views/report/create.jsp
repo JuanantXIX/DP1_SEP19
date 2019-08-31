@@ -46,13 +46,13 @@
 			<spring:message code="report.decision" />* :
 		</form:label>
 		 <form:select path="decision" name="decision" id="decision">
-			<form:option value="ACCEPTED"></form:option>
-			<form:option value="REJECTED"></form:option>
-			<form:option value="BORDER-LINE"></form:option>
+			<form:option value="ACCEPT"><spring:message code="report.accept"/></form:option>
+			<form:option value="REJECT"><spring:message code="report.reject"/></form:option>
+			<form:option value="BORDER-LINE"><spring:message code="report.borderline"/></form:option>
 		</form:select>
 		<form:errors cssClass="error" path="decision" />
 		<br/><br/>
-
+		
 		<form:label path="comments">
 			<spring:message code="report.comments" />* :
 		</form:label>

@@ -28,6 +28,7 @@ public abstract class Activity extends DomainEntity {
 	private String				room;
 	private Collection<String>	attachments;
 	private Date				startDate;
+	private Integer				duration;
 	private Date				endDate;
 	private Conference			conference;
 	private List<Comment>		comments;
@@ -90,7 +91,6 @@ public abstract class Activity extends DomainEntity {
 		this.conference = conference;
 	}
 
-	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
 	public Date getEndDate() {
@@ -108,6 +108,15 @@ public abstract class Activity extends DomainEntity {
 
 	public void setComments(final List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	@NotNull
+	public Integer getDuration() {
+		return this.duration;
+	}
+
+	public void setDuration(final Integer duration) {
+		this.duration = duration;
 	}
 
 }

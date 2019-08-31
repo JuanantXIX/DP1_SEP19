@@ -16,6 +16,7 @@
 <form:hidden path="id"/>
 <form:hidden path="version" />
 <form:hidden path="conference"/>
+<form:hidden path="endDate"/>
 		
 		<form:label path="title">
 			<spring:message code="activity.title" />* :
@@ -31,11 +32,11 @@
 		<form:errors cssClass="error" path="startDate" />
 		<br/><br/>
 
-		<form:label path="endDate">
-			<spring:message code="activity.endDate" />*:
+		<form:label path="duration">
+			<spring:message code="activity.duration" />* :
 		</form:label>
-		<form:input path="endDate" placeholder="dd-MM-yyyy HH:mm"/>
-		<form:errors cssClass="error" path="endDate" />
+		<form:input path="duration" />
+		<form:errors cssClass="error" path="duration" />
 		<br/><br/>
 		
 		<form:label path="speakers">

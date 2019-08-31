@@ -16,7 +16,21 @@
 <display:column property="originalityScore" titleKey="report.originalityScore" />
 <display:column property="qualityScore" titleKey="report.qualityScore" />
 <display:column property="readabilityScore" titleKey="report.readabilityScore" />
-<display:column property="decision" titleKey="report.decision" />
+<display:column titleKey="report.decision" >
+<jstl:if test="${row.decision == 'ACCEPT' }">
+<spring:message code="report.accept"/>
+
+</jstl:if>
+<jstl:if test="${row.decision == 'REJECT' }">
+<spring:message code="report.reject"/>
+
+</jstl:if>
+<jstl:if test="${row.decision == 'BORDER-LINE' }">
+<spring:message code="report.borderline"/>
+
+</jstl:if>
+
+</display:column>
 <display:column property="comments" titleKey="report.comments" />
 <security:authorize access="hasRole('REVIEWER')">
 <display:column><a href="report/reviewer/show.do?reportId=${row.id }"><spring:message code="report.show"/></a>

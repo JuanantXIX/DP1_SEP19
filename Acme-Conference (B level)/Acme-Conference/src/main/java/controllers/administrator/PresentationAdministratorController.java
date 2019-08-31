@@ -2,6 +2,7 @@
 package controllers.administrator;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -97,6 +98,15 @@ public class PresentationAdministratorController extends AbstractController {
 				res = this.createEditModelAndView(presentation, "presentation.commit.error");
 				return res;
 			}
+			//Calculo endDate a partir de startDate y duration:
+			final Calendar cal = Calendar.getInstance();
+			cal.setTime(presentation.getStartDate());
+
+			cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE) + presentation.getDuration());
+
+			presentation.setEndDate(cal.getTime());
+
+			//Fin del cálculo
 			final Conference c = presentation.getConference();
 			Assert.isTrue(presentation.getStartDate().before(presentation.getEndDate()), "wrong dates");
 			Assert.isTrue(!c.getStartDate().after(presentation.getStartDate()), "wrong start");

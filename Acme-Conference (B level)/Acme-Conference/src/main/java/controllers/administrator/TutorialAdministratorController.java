@@ -1,6 +1,7 @@
 
 package controllers.administrator;
 
+import java.util.Calendar;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -95,6 +96,15 @@ public class TutorialAdministratorController extends AbstractController {
 				res = this.createEditModelAndView(tutorial, "tutorial.commit.error");
 				return res;
 			}
+			//Calculo endDate a partir de startDate y duration:
+			final Calendar cal = Calendar.getInstance();
+			cal.setTime(tutorial.getStartDate());
+
+			cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE) + tutorial.getDuration());
+
+			tutorial.setEndDate(cal.getTime());
+
+			//Fin del cálculo
 			final Conference c = tutorial.getConference();
 			Assert.isTrue(!c.getStartDate().after(tutorial.getStartDate()), "wrong start");
 			Assert.isTrue(!c.getEndDate().before(tutorial.getEndDate()), "wrong end");

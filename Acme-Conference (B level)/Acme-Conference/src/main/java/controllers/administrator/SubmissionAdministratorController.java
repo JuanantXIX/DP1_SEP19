@@ -173,11 +173,11 @@ public class SubmissionAdministratorController extends AbstractController {
 					int neutral = 0;
 					String decision = "";
 					for (final Report r : reportsOfSubmission) {
-						if (r.getDecision().equals("ACCEPTED"))
+						if (r.getDecision().equals("ACCEPT"))
 							positive++;
 						if (r.getDecision().equals("BORDER-LINE"))
 							neutral++;
-						if (r.getDecision().equals("REJECTED"))
+						if (r.getDecision().equals("REJECT"))
 							negative++;
 					}
 					if (positive > negative) {
