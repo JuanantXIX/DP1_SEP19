@@ -111,10 +111,15 @@ public class ReviewerService {
 		wordsInSummary = summary.split(" ");
 
 		for (final Reviewer r : reviewers) {
+			final List<String> keywordsUtil = (List<String>) r.getKeywords();
+			final List<String> keywords = new ArrayList<String>();
+			for (final String s : keywordsUtil)
+				keywords.add(s.toUpperCase());
+
 			containsKeyword = false;
 			alreadyIntroduced = false;
 			for (int i = 0; i < wordsInTitle.length; i++)
-				if (r.getKeywords().contains(wordsInTitle[i])) {
+				if (keywords.contains(wordsInTitle[i].toUpperCase())) {
 					containsKeyword = true;
 					break;
 				}
@@ -126,7 +131,7 @@ public class ReviewerService {
 			}
 			if (!alreadyIntroduced) {
 				for (int i = 0; i < wordsInSummary.length; i++)
-					if (r.getKeywords().contains(wordsInSummary[i])) {
+					if (keywords.contains(wordsInSummary[i].toUpperCase())) {
 						containsKeyword = true;
 						break;
 					}

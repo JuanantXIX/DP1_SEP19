@@ -65,7 +65,7 @@ public class MessageController extends AbstractController {
 			final Actor actual = this.actorService.findByPrincipal();
 			Assert.isTrue(message.getSender().getId() == actual.getId() || message.getRecipient().getId() == actual.getId());
 		} catch (final Throwable oops) {
-			res = new ModelAndView("redirect:message/list");
+			res = new ModelAndView("redirect:list.do");
 			return res;
 		}
 		res = new ModelAndView("message/show");

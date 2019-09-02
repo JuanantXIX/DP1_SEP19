@@ -1,6 +1,7 @@
 
 package controllers.author;
 
+import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
 import javax.validation.Valid;
@@ -15,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.UserAccount;
+import services.ActorService;
 import services.AuthorService;
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Author;
 
 @Controller
@@ -25,6 +29,9 @@ public class AuthorAuthorController extends AbstractController {
 
 	@Autowired
 	private AuthorService	authorService;
+
+	@Autowired
+	private ActorService	actorService;
 
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -54,11 +61,23 @@ public class AuthorAuthorController extends AbstractController {
 			if (!author.getEmail().isEmpty() || author.getEmail() != "")
 				Assert.isTrue(author.getEmail().matches("^[A-z0-9]+@[A-z0-9.]+$") || author.getEmail().matches("^[A-z0-9 ]+ <[A-z0-9]+@[A-z0-9.]+>$"), "Wrong email");
 			TimeUnit.SECONDS.sleep(1);
+
+			final Collection<Actor> allAuthors = this.actorService.findAll();
+
+			if (author.getId() == 0)
+				for (final Actor a : allAuthors) {
+					final UserAccount ua = a.getUserAccount();
+					if (ua.getUsername().toUpperCase().equals(author.getUserAccount().getUsername().toUpperCase()))
+						throw new IllegalArgumentException("name taken");
+				}
+
 			this.authorService.save(author);
 			res = new ModelAndView("redirect:/welcome/index.do");
 			return res;
 		} catch (final ValidationException oops) {
 			res = this.createEditModelAndView(author);
+		} catch (final IllegalArgumentException oops) {
+			res = this.createEditModelAndView(author, "actor.name.taken");
 		} catch (final Throwable oops) {
 			if (oops.getMessage() == "Wrong email")
 				res = this.createEditModelAndView(author, "author.email.error");

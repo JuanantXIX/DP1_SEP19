@@ -37,8 +37,11 @@ public class ReportAuthorController extends AbstractController {
 	public ModelAndView list(@RequestParam final int submissionId) {
 		final ModelAndView result;
 		final Submission submission = this.submissionService.findOne(submissionId);
+		final Author actual = this.authorService.findByPrincipal();
 		try {
 			Assert.isTrue(!(submission.getStatus().equals("UNDER-REVIEW")));
+			Assert.isTrue(submission.isStatusVisible() == true);
+			Assert.isTrue(submission.getAuthor().getId() == actual.getId());
 		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect:/welcome/index.do");
 			return result;

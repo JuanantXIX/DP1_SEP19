@@ -1,6 +1,7 @@
 
 package controllers.administrator;
 
+import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
 import javax.validation.Valid;
@@ -15,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.UserAccount;
+import services.ActorService;
 import services.AdministratorService;
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Administrator;
 
 @Controller
@@ -25,6 +29,9 @@ public class AdministratorAdministratorController extends AbstractController {
 
 	@Autowired
 	private AdministratorService	administratorService;
+
+	@Autowired
+	private ActorService			actorService;
 
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -48,11 +55,22 @@ public class AdministratorAdministratorController extends AbstractController {
 			}
 			if (!administrator.getEmail().isEmpty() || administrator.getEmail() != "")
 				Assert.isTrue(administrator.getEmail().matches("^[A-z0-9]+@$") || administrator.getEmail().matches("^[A-z0-9 ]+ <[A-z0-9]+@>$"), "Wrong email");
+
+			final Collection<Actor> allAuthors = this.actorService.findAll();
+
+			for (final Actor a : allAuthors) {
+				final UserAccount ua = a.getUserAccount();
+				if (ua.getUsername().toUpperCase().equals(administrator.getUserAccount().getUsername().toUpperCase()))
+					throw new IllegalArgumentException("name taken");
+			}
+
 			this.administratorService.save(administrator);
 			res = new ModelAndView("redirect:/welcome/index.do");
 			return res;
 		} catch (final ValidationException oops) {
 			res = this.createEditModelAndView(administrator);
+		} catch (final IllegalArgumentException oops) {
+			res = this.createEditModelAndView(administrator, "actor.name.taken");
 		} catch (final Throwable oops) {
 			if (oops.getMessage() == "Wrong email")
 				res = this.createEditModelAndView(administrator, "administrator.email.error");
@@ -90,11 +108,23 @@ public class AdministratorAdministratorController extends AbstractController {
 			if (!administrator.getEmail().isEmpty() || administrator.getEmail() != "")
 				Assert.isTrue(administrator.getEmail().matches("^[A-z0-9]+@$") || administrator.getEmail().matches("^[A-z0-9 ]+ <[A-z0-9]+@>$"), "Wrong email");
 			TimeUnit.SECONDS.sleep(1);
+			final Collection<Actor> allAuthors = this.actorService.findAll();
+
+			if (administrator.getId() == 0)
+				for (final Actor a : allAuthors) {
+					final UserAccount ua = a.getUserAccount();
+					if (ua.getUsername().toUpperCase().equals(administrator.getUserAccount().getUsername().toUpperCase()))
+						throw new IllegalArgumentException("name taken");
+				}
+
 			this.administratorService.save(administrator);
 			res = new ModelAndView("redirect:/welcome/index.do");
 			return res;
 		} catch (final ValidationException oops) {
-			res = this.createEditModelAndView2(administrator);
+			res = this.createEditModelAndView(administrator);
+		} catch (final IllegalArgumentException oops) {
+			res = this.createEditModelAndView(administrator, "actor.name.taken");
+
 		} catch (final Throwable oops) {
 			if (oops.getMessage() == "Wrong email")
 				res = this.createEditModelAndView2(administrator, "administrator.email.error");

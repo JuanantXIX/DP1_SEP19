@@ -17,7 +17,19 @@
 <br/>
 <h3><spring:message code="report.readabilityScore"/>: </h3><jstl:out value="${report.readabilityScore }"/>
 <br/>
-<h3><spring:message code="report.decision"/>: </h3><jstl:out value="${report.decision }"/>
+<h3><spring:message code="report.decision"/>: </h3>
+<jstl:if test="${report.decision == 'ACCEPT' }">
+<spring:message code="report.accept"/>
+
+</jstl:if>
+<jstl:if test="${report.decision == 'REJECT' }">
+<spring:message code="report.reject"/>
+
+</jstl:if>
+<jstl:if test="${report.decision == 'BORDER-LINE' }">
+<spring:message code="report.borderline"/>
+
+</jstl:if>
 <br/>
 <h3><spring:message code="report.comments"/>: </h3><jstl:out value="${report.comments }"/>
 <br/>

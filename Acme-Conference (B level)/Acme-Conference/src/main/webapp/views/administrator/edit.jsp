@@ -75,7 +75,7 @@
 		<br/><br/>
 		
 		<form:label path="phoneNumber">
-			<spring:message code="author.phoneNumber" />* :
+			<spring:message code="author.phoneNumber" />:
 		</form:label>
 		<form:input path="phoneNumber" onchange="phoneRegexpCheck(this)"/>
 		<form:errors cssClass="error" path="phoneNumber" />

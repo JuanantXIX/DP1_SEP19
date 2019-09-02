@@ -56,6 +56,7 @@ public class ReportReviewerController extends AbstractController {
 
 		try {
 			final Submission submission = this.submissionService.findOne(submissionId);
+			Assert.isTrue(submission.getReviewer().contains(reviewer));
 			Assert.isTrue(submission.getStatus().equals("UNDER-REVIEW"), "Submission already evaluated");
 			final Collection<Report> allReports = this.reportService.findAllByReviewerId(reviewer);
 			for (final Report r : allReports)

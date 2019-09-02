@@ -232,7 +232,7 @@ public class SubmissionAdministratorController extends AbstractController {
 		final Collection<Submission> submissions = this.submissionService.findAllGroupedByStatus();
 		result = new ModelAndView("submission/list");
 		result.addObject("submissions", submissions);
-		result.addObject("message", "submission.scored");
+		result.addObject("message", "submission.notified");
 		result.addObject("requestURI", "/submission/administrator/list.do");
 
 		return result;
