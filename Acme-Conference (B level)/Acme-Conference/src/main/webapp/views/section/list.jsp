@@ -10,6 +10,9 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<jsp:useBean id="now" class="java.util.Date"/>
+
+
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="sections" requestURI="${requestURI}" id="row">
 
@@ -20,13 +23,17 @@
 </display:column>
 <security:authorize access="hasRole('ADMIN')">
 
+<jstl:if test="${tutorial.endDate ge now }">
 
 <display:column><a href="section/administrator/edit.do?sectionId=${row.id }"><spring:message code="section.edit"/></a></display:column>
 <display:column><a href="section/administrator/delete.do?sectionId=${row.id }"><spring:message code="section.delete"/></a></display:column>
+</jstl:if>
 </security:authorize>
 </display:table>
 <security:authorize access="hasRole('ADMIN')">
+<jstl:if test="${tutorial.endDate ge now }">
 
 <a href="section/administrator/create.do?tutorialId=${tutorialId }"><spring:message code="section.create"/></a>
+</jstl:if>
 </security:authorize>
 <br/>

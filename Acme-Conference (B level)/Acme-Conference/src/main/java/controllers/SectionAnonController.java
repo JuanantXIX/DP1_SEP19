@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.SectionService;
+import services.TutorialService;
 import domain.Section;
+import domain.Tutorial;
 
 @Controller
 @RequestMapping("/section")
@@ -20,14 +22,20 @@ public class SectionAnonController extends AbstractController {
 	@Autowired
 	private SectionService	sectionService;
 
+	@Autowired
+	private TutorialService	tutorialService;
+
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int tutorialId) {
 		final ModelAndView result;
+		final Tutorial tutorial = this.tutorialService.findOne(tutorialId);
+
 		final List<Section> sections = this.sectionService.findAllByTutorial(tutorialId);
 		result = new ModelAndView("section/list");
 		result.addObject("sections", sections);
 		result.addObject("tutorialId", tutorialId);
+		result.addObject("tutorial", tutorial);
 		return result;
 	}
 

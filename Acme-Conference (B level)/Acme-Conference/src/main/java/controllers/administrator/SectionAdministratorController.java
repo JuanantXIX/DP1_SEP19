@@ -19,6 +19,7 @@ import services.SectionService;
 import services.TutorialService;
 import controllers.AbstractController;
 import domain.Section;
+import domain.Tutorial;
 
 @Controller
 @RequestMapping("/section/administrator")
@@ -37,9 +38,11 @@ public class SectionAdministratorController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int tutorialId) {
 		final ModelAndView result;
+		final Tutorial tutorial = this.tutorialService.findOne(tutorialId);
 		final List<Section> sections = this.sectionService.findAllByTutorial(tutorialId);
 		result = new ModelAndView("section/list");
 		result.addObject("sections", sections);
+		result.addObject("tutorial", tutorial);
 		result.addObject("tutorialId", tutorialId);
 		return result;
 	}
